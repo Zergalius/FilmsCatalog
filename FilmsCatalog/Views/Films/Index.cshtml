@@ -1,0 +1,55 @@
+﻿@model FilmsIndexViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="row ">
+    <div class="col-1">
+        <div class="row align-items-center h-100">
+            <div class="col">
+                @if (Model.Page.HasPreviousPage)
+                {
+                    <a href="#" class="toPage" data-page="@(Model.Page.PageNumber - 1)"><i class="fas fa-chevron-circle-left fa-3x"></i></a>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="row row-cols-1 row-cols-md-3">
+            @foreach (var film in Model.Films)
+            {
+                var img = film.PosterId == null ? "/images/default.jpg" : $"/Poster/Get?id={film.PosterId}";
+                <div class="col mb-4">
+                    <div class="card film h-100" id="@film.Id">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img style="width:100%;height:100%" src="@img" class="card-img-top" alt="@film.Name">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">@film.Name</h5>
+                                    <p class="card-text">@film.Producer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-1">
+        <div class="row align-items-center h-100">
+            <div class="col">
+                @if (Model.Page.HasNextPage)
+                {
+                    <a href="#" class="toPage" data-page="@(Model.Page.PageNumber + 1)"><i class="fas fa-chevron-circle-right fa-3x"></i></a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">        
+        <partial name="_PagingPartial" model="Model.Page" />
+    </div>
+</div>

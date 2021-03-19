@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="filmsList">
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <script>
+        let p = localStorage.getItem('page');
+        if (p == undefined) {
+            p = 1;
+        }
+        FilmsLoad(p, pageSize);
+    </script>
+}

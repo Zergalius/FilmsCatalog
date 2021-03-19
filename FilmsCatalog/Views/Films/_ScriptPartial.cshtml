@@ -1,0 +1,48 @@
+﻿<script>
+    $(document).ready(function () {
+
+        $('#Producer').autocomplete({
+            source: function(request, response) {
+                $.getJSON('@Url.Action("Autocomplete", "Home")',
+                    { term: request.term, source: 'Producer'},
+                response);
+            },
+            minLength: 10000,
+            delay: 10,
+            cache: false,
+            select: function (_event, ui) {
+                $('#Producer').val(ui.item.value).blur();
+                return false;
+            },
+        }).autocomplete('instance')._renderItem = function (ul, item) {
+                return $('<li>').append('<div>' + item.value + '</div>').appendTo(ul);
+            };
+
+        $('#Producer').focus(function () {
+                $(this).autocomplete('option', 'minLength', 1).autocomplete('search', ' ');
+        });
+
+
+        $('#Year').autocomplete({
+            source: function(request, response) {
+                $.getJSON('@Url.Action("Autocomplete", "Home")',
+                    { term: request.term, source: 'Year'},
+                response);
+            },
+            minLength: 10000,
+            delay: 10,
+            cache: false,
+            select: function (_event, ui) {
+                $('#Year').val(ui.item.value).blur();
+                return false;
+            },
+        }).autocomplete('instance')._renderItem = function (ul, item) {
+                return $('<li>').append('<div>' + item.value + '</div>').appendTo(ul);
+            };
+
+        $('#Year').focus(function () {
+                $(this).autocomplete('option', 'minLength', 1).autocomplete('search', ' ');
+            });
+
+    });
+</script>

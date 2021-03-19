@@ -1,0 +1,20 @@
+﻿@model PageViewModel
+@{
+    int lastP = 0;
+}
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center pagination-lg ">
+        @foreach (var p in Model.ListPages)
+        {
+            if (lastP != p - 1)
+            {
+
+                <li class="page-item page-empty"></li>
+            }
+            string active = p == Model.PageNumber ? "active" : "";
+            <li class="page-item @active"><a class="page-link toPage" data-page="@p" href="#">@p</a></li>
+            lastP = p;
+        }
+    </ul>
+</nav>
